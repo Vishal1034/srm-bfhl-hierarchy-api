@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRM BFHL Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="panel intro">
+        <p class="eyebrow">SRM Full Stack Engineering Challenge</p>
+        <h1>Hierarchy Builder</h1>
+        <p class="copy">
+          Enter nodes in the format <strong>X-&gt;Y</strong>. Use comma, space, or new line separation. Click submit to call <strong>/bfhl</strong>.
+        </p>
+      </section>
+
+      <section class="panel form-panel">
+        <div class="row-head">
+          <label for="inputData">Node Entries</label>
+          <span id="entryCount" class="pill">0 entries</span>
+        </div>
+        <textarea id="inputData" rows="9" placeholder="A->B, A->C, B->D"></textarea>
+        <p class="helper">Use the exact format X-&gt;Y (example: A-&gt;B).</p>
+        <div class="actions">
+          <button id="submitBtn" type="button">Submit</button>
+          <button id="sampleBtn" type="button" class="ghost">Load Sample</button>
+        </div>
+        <p id="status" class="status" aria-live="polite"></p>
+      </section>
+
+      <section class="panel result-panel">
+        <div class="row-head">
+          <h2>Response</h2>
+          <span id="responseState" class="pill muted">Waiting</span>
+        </div>
+        <pre id="result" class="result">No response yet.</pre>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
