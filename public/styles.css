@@ -1,10 +1,10 @@
 :root {
-  --bg: #f8f6f1;
-  --ink: #1f2d2f;
-  --panel: #fffdf8;
-  --line: #c8c4b8;
-  --accent: #0c7c59;
-  --accent-soft: #d6f0e7;
+  --bg: #f4f7f5;
+  --ink: #1b2d31;
+  --panel: rgba(255, 255, 255, 0.86);
+  --line: #c6d3cd;
+  --accent: #0f8f68;
+  --accent-soft: #dcf3ea;
   --danger: #b83b3b;
 }
 
@@ -17,32 +17,73 @@ body {
   min-height: 100vh;
   font-family: "Manrope", sans-serif;
   color: var(--ink);
+  position: relative;
+  overflow-x: hidden;
   background:
-    radial-gradient(circle at 12% 12%, #f0e6cf 0%, transparent 45%),
-    radial-gradient(circle at 88% 0%, #d7ece2 0%, transparent 35%),
+    radial-gradient(circle at 12% 12%, #f1e5ca 0%, transparent 45%),
+    radial-gradient(circle at 88% 0%, #d2efe0 0%, transparent 35%),
     var(--bg);
 }
 
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  width: 380px;
+  height: 380px;
+  border-radius: 999px;
+  filter: blur(36px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+body::before {
+  right: -120px;
+  top: 120px;
+  background: #c7ece5;
+}
+
+body::after {
+  left: -160px;
+  bottom: -80px;
+  background: #f0e2b9;
+}
+
 .layout {
-  max-width: 980px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 32px 18px 46px;
+  padding: 36px 18px 56px;
   display: grid;
-  gap: 18px;
+  gap: 20px;
   grid-template-columns: 1fr;
 }
 
 .panel {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 10px 28px rgba(31, 45, 47, 0.08);
-  animation: reveal 0.45s ease both;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 16px 34px rgba(23, 42, 45, 0.1);
+  backdrop-filter: blur(6px);
+  animation: reveal 0.5s ease both;
+}
+
+.panel:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.panel:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.intro {
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(247, 252, 249, 0.8));
 }
 
 .intro h1 {
-  margin: 8px 0;
+  margin: 8px 0 10px;
   font-family: "DM Serif Display", serif;
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.06;
@@ -59,6 +100,28 @@ body {
 .copy {
   margin: 0;
   max-width: 65ch;
+  color: #304649;
+}
+
+.copy strong {
+  color: #0a6d50;
+}
+
+.intro-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.intro-tags span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #bfd7cf;
+  background: rgba(232, 245, 240, 0.8);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #2d5f50;
 }
 
 .form-panel label {
@@ -104,8 +167,9 @@ textarea {
   font-family: "Manrope", sans-serif;
   font-size: 0.95rem;
   line-height: 1.4;
-  background: #fff;
+  background: #fbfefd;
   resize: vertical;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 textarea:focus {
@@ -117,6 +181,7 @@ textarea:focus {
   display: flex;
   gap: 10px;
   margin-top: 12px;
+  flex-wrap: wrap;
 }
 
 button {
@@ -126,12 +191,13 @@ button {
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s ease, filter 0.2s ease;
+  transition: transform 0.15s ease, filter 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
   transform: translateY(-1px);
   filter: brightness(1.04);
+  box-shadow: 0 8px 18px rgba(31, 45, 47, 0.14);
 }
 
 button:disabled {
@@ -141,7 +207,7 @@ button:disabled {
 }
 
 #submitBtn {
-  background: var(--accent);
+  background: linear-gradient(135deg, #0f8f68, #0a7756);
   color: #fff;
 }
 
@@ -152,9 +218,11 @@ button:disabled {
 
 .status {
   min-height: 1.25rem;
-  margin: 10px 0 0;
-  color: #415857;
+  margin: 12px 0 0;
+  color: #355153;
   font-size: 0.9rem;
+  border-left: 3px solid #b9ded1;
+  padding-left: 8px;
 }
 
 .status.error {
@@ -167,14 +235,17 @@ button:disabled {
 
 .result {
   margin: 0;
-  background: #1f2d2f;
-  color: #deefe6;
+  background:
+    linear-gradient(180deg, #1c2f33, #15252a),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 22px);
+  color: #ddf4ea;
   border-radius: 12px;
-  padding: 12px;
+  padding: 14px;
   overflow: auto;
-  font-size: 0.88rem;
-  line-height: 1.45;
-  min-height: 180px;
+  font-size: 0.87rem;
+  line-height: 1.5;
+  min-height: 240px;
+  border: 1px solid rgba(176, 220, 203, 0.35);
 }
 
 @keyframes reveal {
@@ -190,10 +261,28 @@ button:disabled {
 
 @media (min-width: 880px) {
   .layout {
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: 1.06fr 0.94fr;
   }
 
   .intro {
     grid-column: 1 / span 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .panel {
+    padding: 16px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+
+  .result {
+    min-height: 210px;
   }
 }

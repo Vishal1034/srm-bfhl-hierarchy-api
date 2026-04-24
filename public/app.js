@@ -42,6 +42,7 @@ submitBtn.addEventListener("click", async () => {
     statusEl.classList.remove("error");
     responseStateEl.textContent = "Loading";
     responseStateEl.classList.remove("muted");
+    resultEl.style.opacity = "0.7";
 
     const usedUnicodeArrow = input.value.includes("→");
     const normalizedInput = input.value.replaceAll("→", "->");
@@ -64,6 +65,7 @@ submitBtn.addEventListener("click", async () => {
 
     const payload = await response.json();
     resultEl.textContent = JSON.stringify(payload, null, 2);
+    resultEl.style.opacity = "1";
     statusEl.textContent = usedUnicodeArrow
       ? "Success (converted Unicode arrow to -> automatically)"
       : "Success";
@@ -72,6 +74,7 @@ submitBtn.addEventListener("click", async () => {
     statusEl.textContent = error.message;
     statusEl.classList.add("error");
     resultEl.textContent = "No response due to error.";
+    resultEl.style.opacity = "1";
     responseStateEl.textContent = "Error";
   } finally {
     submitBtn.disabled = false;
